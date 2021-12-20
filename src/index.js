@@ -19,8 +19,8 @@ const httpServer = createServer(
     const baseURL =  request.protocol + '://' + request.headers.host + '/';
     const { pathname } = new URL(request.url, baseURL);
     if (pathname === '/hello') {
-      response.writeHead(200, {"Content-Type": "text/plain"});
-      response.write("hello");
+      response.writeHead(200);
+      response.write('hello');
       response.end();
     }
   }
