@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "socket.io": "^4.4.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
