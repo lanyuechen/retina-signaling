@@ -1,10 +1,30 @@
 /* eslint-disable no-console */
 const { createServer } = require('https');
 const { Server } = require('socket.io');
+const fs = require('fs');
 
 const PORT = 8080;
 
-const httpServer = createServer();
+const key = fs.readFileSync('/ssl/cert.key');
+const cert = fs.readFileSync('/ssl/cert.pem');
+
+const options = {
+  key,
+  cert,
+};
+
+const httpServer = createServer(
+  options,
+  (request, response) => {
+    const baseURL =  request.protocol + '://' + request.headers.host + '/';
+    const { pathname } = new URL(request.url, baseURL);
+    if (pathname === '/hello') {
+      response.writeHead(200, {"Content-Type": "text/plain"});
+      response.write("hello");
+      response.end();
+    }
+  }
+);
 
 httpServer.listen(PORT);
 
